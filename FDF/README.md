@@ -308,7 +308,7 @@ void	render(t_map *map)
 {
 	t_mlx	*win;
 	win = malloc(sizeof(t_mlx)); // Allocate memory for the window structure
-  set_up_win(win); // Set up the window properties and initial configurations
+  	set_up_win(win); // Set up the window properties and initial configurations
 	win->mlx_connect = mlx_init(); // Initialize connection to the MiniLibX library
 	win->mlx_win = mlx_new_window(win->mlx_connect, WIDTH, HEIGHT, "Fdf"); // Create a new window with specified dimensions and title
 	win->map = map; // Associate the map data with the window structure
@@ -331,14 +331,21 @@ Another interesting function is the `mlx_loop_hook`, this function is used to se
 mlx_loop_hook(win->mlx_connect, &draw, win)
 ```
 We will draw on the new image that we created, and after we draw the entire image, we will update the window. This is similar to how a game works: the entire image is updated as we play, so we don’t see all the pixels being drawn on the screen.
+
+### 3.1 Drawing the pixel
+
 Drawing the exact pixel we want isn't very hard. We just have to locate the pixel we want and change its color. The expression we need to use is:
 ```
 pixel = img->addr + (y * img->line_len + x * (img->bpp / 8))
 ```
 The pixel variable is a char* just like any other string. This means we add the x value to the string to get the pixel we want.
+
 For example, if we want to get the 155th position of a string, we can do it with str + 155. This works exactly the same way when we want to get a specific pixel in the image!
+
 We just need to multiply y by the line length and add x multiplied by the bits per pixel divided by 8 to get the correct memory address of the pixel.
+
 Now we "paint the pixel" -> *(int *)pixel = color;
+
 ```
 void	my_pixel_put(t_img *img, int x, int y, int color)
 {
@@ -373,10 +380,7 @@ mlx_hook(win->mlx_win, 17, 0, ft_close, win)
 ```
 Also, I didn't go through it in detail, but don't forget that you need to ensure the program only reads .fdf files and that you have the necessary permissions to open the file!
 # Time to make all kind of bonus!
-Finnaly we arrive at the end!
-Now make all the bonus you want. I wount explain anymore so you can let your imagination go wild!
-Ok just a litle tip...You can change the color but mustiplying a color factor to the original color. Just do -> color *= 1.45 at it aplys a shade of red :D
-Have FUN!
+Finally, we arrive at the end! Now, you can add all the bonuses you want. I won't explain any more so you can let your imagination run wild! Okay, just a little tip... You can change the color by multiplying a color factor with the original color. Just do color *= 1.45 and it applies a shade of red! Have FUN! 🎨
 ### Conclusion
 I hope I managed to help you in this project! By following this guide i hope you learned how to:
 * Gain a solid understanding of the key concepts and data structures used in the project.
