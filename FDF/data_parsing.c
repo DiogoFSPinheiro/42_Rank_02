@@ -6,11 +6,17 @@
 /*   By: diogosan <diogosan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:53:50 by diogosan          #+#    #+#             */
-/*   Updated: 2024/06/26 11:29:45 by diogosan         ###   ########.fr       */
+/*   Updated: 2024/07/03 13:54:49 by diogosan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+/*
+* Gets the dimensions of the map
+* The get_next_line func is very handy in this situation!
+* Dont forget to close the file...we dont want any errors
+* Dont forget to free all the lines after reading then...we dont want any leaks
+*/
 
 int	ft_get_dimensions(int *x, int *y, char *filename)
 {
@@ -35,6 +41,14 @@ int	ft_get_dimensions(int *x, int *y, char *filename)
 	return (1);
 }
 
+/*
+* Time to set the points
+* We save every data we think will be usefull on each point
+* Lets use ft_split again but this time with a coma
+* Again if we dont find any color we make it white (0xffffff)
+* why 0xffffff? We can divide this as 0x(R)ff(G)ff(B)ff
+* As we know the color white is all the colors togeder so its all ffs xD
+*/
 void	ft_set_point(t_point *point, char *str, int x, int y)
 {
 	char	**data;
@@ -50,7 +64,14 @@ void	ft_set_point(t_point *point, char *str, int x, int y)
 	free_args(data);
 }
 
-void	ft_fill_matix(t_point *row, char *line, int y) // preenche a matriz
+/*
+* Time to fill the matrix
+* Remember the ft_split func? Time to put it to use!
+* We need to se if we have color info on that coordenate and save it.
+* To do that we use the ft_fill_matix func
+* Again, free all the lines after reading then...leaks are annoying xD
+*/
+void	ft_fill_matix(t_point *row, char *line, int y)
 {
 	char	**data;
 	int		c;
@@ -66,6 +87,13 @@ void	ft_fill_matix(t_point *row, char *line, int y) // preenche a matriz
 	free(data);
 }
 
+/*
+* Lets read the map
+* Now that we have the dimensions we can alloc memory and fill the map struct.
+* The get_next_line func is very handy in this situation!
+* To do that we use the ft_fill_matix func
+* Free all the lines after reading then...leaks are annoying xD
+*/
 t_map	*ft_convert_data(char *filemap)
 {
 	t_map	*map;

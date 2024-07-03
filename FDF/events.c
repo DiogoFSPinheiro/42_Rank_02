@@ -6,7 +6,7 @@
 /*   By: diogosan <diogosan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 10:43:05 by diogosan          #+#    #+#             */
-/*   Updated: 2024/06/26 11:29:58 by diogosan         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:58:11 by diogosan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,25 @@ static int	more_keys(int Key, t_mlx *mlx);
 
 void	ft_cleanup_and_exit(t_mlx *mlx)
 {
+	// If there is a valid connection to the MLX library
 	if (mlx->mlx_connect != NULL)
 	{
+		// Destroy the image associated with the connection
 		mlx_destroy_image(mlx->mlx_connect, mlx->img.mlx_img);
+		// If there is a valid window, destroy it
 		if (mlx->mlx_win != NULL)
 			mlx_destroy_window(mlx->mlx_connect, mlx->mlx_win);
+		// Destroy the display associated with the connection
 		mlx_destroy_display(mlx->mlx_connect);
+		// Free the memory allocated for the MLX connection
 		free(mlx->mlx_connect);
 	}
+	// If there is a valid map, free its memory
 	if (mlx->map != NULL)
 		free_map(mlx->map);
+	// Free the memory allocated for the MLX structure itself
 	free(mlx);
+	// Exit the program
 	exit(0);
 }
 
