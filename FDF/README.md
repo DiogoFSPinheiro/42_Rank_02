@@ -1,5 +1,7 @@
 # Step by Step Guide of the FDF Project
 
+![image](https://github.com/DiogoFSPinheiro/42_Rank_02/assets/143399294/839dd643-01af-4d3f-9932-5dd45bbbf794)
+
 The FDF project, short for "Fil de Fer," is a 42School project aimed at introducing students to graphical programming. The objective is to create a simple wireframe model viewer that reads data from a file and displays a 3D representation of the data.
 
 **Objectives of the Project**
