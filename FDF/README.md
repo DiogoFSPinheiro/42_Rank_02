@@ -92,8 +92,9 @@ int main()
 - `Projecting 3D Points onto a 2D Plane:` The 3D points from the map file need to be projected onto a 2D plane to be displayed on the screen. This involves using mathematical transformations to convert 3D coordinates (x, y, z) into 2D coordinates (x, y).
 - `Rendering the Wireframe:` The final step is to render the wireframe model on the screen. This involves drawing lines between the projected 2D points to represent the edges of the 3D object.
 - `Adding Color and Depth:` To enhance the visual appearance, colors can be added based on the elevation values, and shading techniques can be used to give a sense of depth.
+
 # Step-by-Step Implementation
-In this section, we'll walk through the step-by-step implementation of the FDF project. This includes reading and parsing the map file, setting up the graphics library, projecting 3D points, rendering the wireframe, and adding color and depth.
+In this section, we'll walk through the step-by-step implementation of the FDF project. This includes reading and parsing the map file, projecting 3D points, rendering the wireframe, and adding color and depth.
 Firstly we need to make a struck to hold the data, i made this way but you can make any struck i deem necessary
 ```sh
 typedef struct s_point <- This will hold the Values of wach point on the map
@@ -242,8 +243,10 @@ To draw we need to learn some new concepts:
 * `Bresenham's Algorithm:` This is a line drawing algorithm that efficiently determines the points of an approximation of a straight line between two points in a 2D space. 
 * `Isometric View Transformation:` This transformation is used to project 3D points onto a 2D plane in a way that preserves relative distances along the x, y, and z axes.
 * `Rendering and Display:` Utilizing libraries like MiniLibX to create windows, handle events (such as key presses), and continuously redraw the scene (using functions like mlx_loop and mlx_put_image_to_window) to provide an interactive graphical interface.
+
 ### 1. Bresenham's Algorithm
 The algo Works like this:
+
   [1] Determine the initial coordinates (x1, y1) and (x2, y2) of the line;
     
   [2] Calculate the delta_x dx = x2 - x1 and delta_y dy = y2 - y1 to understand the direction;
@@ -282,9 +285,11 @@ void	ft_bresenhams_alg(t_mlx *win, t_point p1, t_point p2)
 ```
 ### 2. Isometric view
 Isometric view is a method used in computer graphics to represent three-dimensional (3D) objects in a two-dimensional (2D) space without any foreshortening of the axes. It aims to provide a more natural and intuitive way of visualizing 3D scenes on a flat surface, such as a computer screen or paper. Unlike perspective views that alter the apparent size of objects based on their distance from the viewer, isometric view maintains equal scaling along all three axes (x, y, and z).
+
 **2.1 How to Implement Isometric View**
 Implementing isometric view involves transforming 3D coordinates into 2D coordinates using specific mathematical operations.
 The isometric projection preserves the angles between the axes (typically 120 degrees) and ensures that objects appear the same size regardless of their distance from the viewer.
+
 **Mathematical Formulation:**
     
 1. Use trigonometric functions such as cosine (cos) and sine (sin) to rotate and scale the 3D coordinates to fit the desired projection angle.
@@ -318,11 +323,17 @@ void	render(t_map *map)
 }
 ```
 Now it comes a new `concept`, the subject says we cant draw pixel per pixel on screen so the mlx_put_pixel is of limits to us!
-How can we draw the image then? Its simple, we use mlx image: 
+
+How can we draw the image then? Its simple, we use mlx image:
+
 Remember the t_img struck in the begginig? Its time to fill that struck with the window data. To achieve that we use the `mlx_new_image`, `mlx_get_data_addr` and `mlx_put_image_to_window` funcs.
+
 `mlx_new_image` - Creates a new image (win->img.mlx_img) in memory with dimensions specified by WIDTH and HEIGHT, which serves as a canvas for drawing operations.
+
 `mlx_get_data_addr` - Retrieves the address (addr), bits per pixel (bpp), line length (line_len), and endianness (endian) information of the image (win->img.mlx_img) for direct manipulation of pixel data.
+
 `mlx_put_image_to_window` - Updates the image
+
 ```
 win->img.mlx_img = mlx_new_image(win->mlx_connect, WIDTH, HEIGHT);
 win->img.addr = mlx_get_data_addr(win->img.mlx_img, &win->img.bpp, &win->img.line_len, &win->img.endian);
@@ -361,12 +372,14 @@ void	my_pixel_put(t_img *img, int x, int y, int color)
 ```
 # Final touches and key handlers
 So we are near the end. We just need to add everything up and apply some key bindings, and we’re done! (I won't paste all the render code here as it is in this folder, so go check it if you need. I tried to place comments to make it easier to read, so have fun browsing.)
+
 The subject says the window must close on the X and when we press the ESQ key, to detect those keys we use the `mlx_key_hook` and `mlx_hook` funcs.
 ```
 mlx_hook(win->mlx_win, KeyPress, KeyPressMask, key handler function name, win)
 mlx_key_hook(win->mlx_win, key handler function name, win)
 ```
 Now, in the key handler function, we just need to compare the key pressed. If it matches the key we want (e.g., the Escape key), we close the window or perform any desired action.
+
 Example:
 ```
 int	ft_event_checker(int Key, t_mlx *mlx)
@@ -382,8 +395,10 @@ mlx_hook(win->mlx_win, 17, 0, ft_close, win)
 ```
 Also, I didn't go through it in detail, but don't forget that you need to ensure the program only reads .fdf files and that you have the necessary permissions to open the file!
 # Time to make all kind of bonus!
+
 Finally, we arrive at the end! Now, you can add all the bonuses you want. I won't explain any more so you can let your imagination run wild! Okay, just a little tip... You can change the color by multiplying a color factor with the original color. Just do color *= 1.45 and it applies a shade of red! Have FUN! 🎨
-### Conclusion
+
+# Conclusion
 I hope I managed to help you in this project! By following this guide i hope you learned how to:
 * Gain a solid understanding of the key concepts and data structures used in the project.
 * Properly set up and configure the MiniLibX graphics library to handle window creation and event management.
@@ -393,5 +408,6 @@ I hope I managed to help you in this project! By following this guide i hope you
 * mplement key bindings and event handlers to allow for interactive control of the visualization.
 * nsure proper resource management and cleanup to avoid memory leaks and ensure smooth execution.
 * This guide has provided a step-by-step approach to understanding and implementing each component of the FDF project. By breaking down the tasks and explaining the concepts clearly, I aimed to make this project accessible even for beginners.
+
 ### Appendices
 I have a txt file that have the links i used during this project, try them if i didnt do a good job during the guide!
