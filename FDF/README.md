@@ -104,12 +104,14 @@ typedef struct s_point <- This will hold the Values of wach point on the map
 	int      z;              <- Value found on (x,y)
 	int      color;          <- Value found after "," , if it doesnt have value we say its White
 }	t_point;
+
 typedef struct s_map // This will hold all the points of th map
 {
 	int        width;
 	int        height;
 	t_point    **coord;
 }	t_map;
+
 typedef struct s_img // This is need for building the image
 {
 	void    *mlx_img;          <- Pointer to the image
@@ -118,6 +120,7 @@ typedef struct s_img // This is need for building the image
 	int     line_len;          <- Line of Image
 	int     endian;
 }	t_img;
+
 typedef struct s_mlx // This will be our visual environment
 {
 	void    *mlx_connect;      <- Pointer to the mlx connection
@@ -132,6 +135,7 @@ typedef struct s_mlx // This will be our visual environment
 	t_img    img;              <- Our image
 }	t_mlx;
 ```
+
 ## 1st Step - Reading and Parsing the Map File
 To start, you need to read the map file that contains the data and parse it into a usable data structure.
 ### 1. Map dimensions
