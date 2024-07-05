@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the PID of the server
-SERVER_PID=250777
+SERVER_PID=$1
 # Number of times to run the command
 TIMES=10
 
