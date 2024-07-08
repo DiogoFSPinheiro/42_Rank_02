@@ -338,6 +338,7 @@ Remember the t_img struck in the begginig? Its time to fill that struck with the
 
 `mlx_put_image_to_window` - Updates the image
 
+Example:
 ```
 win->img.mlx_img = mlx_new_image(win->mlx_connect, WIDTH, HEIGHT);
 win->img.addr = mlx_get_data_addr(win->img.mlx_img, &win->img.bpp, &win->img.line_len, &win->img.endian);
@@ -364,16 +365,17 @@ We just need to multiply y by the line length and add x multiplied by the bits p
 Now we "paint the pixel" -> *(int *)pixel = color;
 
 ```
+
 void	my_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
-	if (x < WIDTH && y < HEIGHT && x > 0 && y > 0)
-	{
-		pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-		*(int *)pixel = color;
-	}
+
+	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	*(int *)pixel = color;
+
 }
 ```
+
 # Final touches and key handlers
 So we are near the end. We just need to add everything up and apply some key bindings, and we’re done! (I won't paste all the render code here as it is in this folder, so go check it if you need. I tried to place comments to make it easier to read, so have fun browsing.)
 
