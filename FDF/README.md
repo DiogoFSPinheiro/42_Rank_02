@@ -21,8 +21,6 @@ The FDF project, short for "Fil de Fer," is a 42School project aimed at introduc
 
 A wireframe model is a visual representation of a 3D object using lines to connect the vertices of the object. It is a skeletal representation where only the edges and vertices are drawn, giving a clear outline of the shape without any surfaces. Wireframes are used extensively in computer graphics to represent 3D objects in a simplified form, making it easier to manipulate and view the structure of complex models.
 
-In the context of the FDF project, you'll be working with a 3D wireframe model that is rendered on a 2D screen. This involves projecting 3D points onto a 2D plane, a fundamental concept in computer graphics.
-
 ## Setting Up the Graphics Library
 
 To visualize your wireframe model, you'll need a graphics library. The FDF project typically uses the MiniLibX library for rendering graphics. Here are the steps to set up MiniLibX and integrate it into your project.
